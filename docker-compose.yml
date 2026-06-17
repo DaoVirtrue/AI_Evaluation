@@ -77,7 +77,26 @@ services:
     read_only: true
     tmpfs: [/tmp]
 
-  # 3. AgentForge — Agent 集成框架 (:8001)
+  # 3. CodeSandbox — 代码安全沙箱 (:8005)
+  code-sandbox:
+    build: ./CodeSandbox（代码安全沙箱）
+    image: code-sandbox:dev
+    ports: ["8005:8005"]
+    environment:
+      - LOG_LEVEL=INFO
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8005/health"]
+      <<: *health
+    deploy:
+      resources:
+        limits: {cpus: '2.0', memory: 512M}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    <<: *security
+    read_only: true
+    tmpfs: [/tmp]
+
+  # 4. AgentForge — Agent 集成框架 (:8001)
   agent-forge:
     build: ./AgentForge（Agent集成框架）
     image: agent-forge:dev

@@ -1,0 +1,63 @@
+name: Nightly Full Benchmark Regression
+
+# 每日凌晨2点（北京时间）全量跑所有Benchmark，检测模型能力回归
+# 对应 Kimi 岗位需求：定期跑Kimi代码能力指标
+
+on:
+  schedule:
+    - cron: '0 18 * * *'  # UTC 18:00 = 北京时间 凌晨2:00
+  workflow_dispatch:
+
+jobs:
+  nightly-benchmark:
+    name: Nightly Benchmark — All Benchmarks
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        benchmark: [humaneval, mbpp, livecodebench]
+        language: [python, javascript]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Benchmark: ${{ matrix.benchmark }} (${{ matrix.language }})
+        run: |
+          echo "=========================================="
+          echo "Benchmark: ${{ matrix.benchmark }}"
+          echo "Language: ${{ matrix.language }}"
+          echo "Time: $(date -u)"
+          echo "=========================================="
+
+      - name: Check for Regression
+        if: always()
+        run: |
+          # Compare with previous run results
+          # Flag regression if pass rate drops >5%
+          echo "Regression check placeholder"
+          echo "Would compare with previous benchmark run and alert if degradation detected"
+
+  # ── Generate Leaderboard ─────────────────────────────────────────
+  generate-leaderboard:
+    name: Generate Leaderboard
+    runs-on: ubuntu-latest
+    needs: nightly-benchmark
+    if: always()
+    steps:
+      - name: Compile Results
+        run: |
+          echo "# Model Leaderboard" > leaderboard.md
+          echo "**Generated:** $(date -u +%Y-%m-%d)" >> leaderboard.md
+          echo "" >> leaderboard.md
+          echo "| Rank | Model | HumanEval pass@1 | MBPP pass@1 | Avg |" >> leaderboard.md
+          echo "|------|-------|-----------------|-------------|-----|" >> leaderboard.md
+          echo "| 1 | TBD | TBD | TBD | TBD |" >> leaderboard.md
+          echo "" >> leaderboard.md
+          echo "> 🤖 Auto-generated nightly benchmark report" >> leaderboard.md
+
+      - name: Upload Leaderboard
+        uses: actions/upload-artifact@v4
+        with:
+          name: leaderboard
+          path: leaderboard.md

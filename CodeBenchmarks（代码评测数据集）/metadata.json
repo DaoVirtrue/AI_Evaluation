@@ -1,0 +1,29 @@
+{
+  "name": "CodeBenchmarks",
+  "display_name": "代码评测数据集",
+  "version": "0.1.0",
+  "project_type": "library",
+  "description": "代码评测数据集管理 — HumanEval/MBPP/LiveCodeBench 加载器 + pass@k 计算 + 自建业务场景数据集",
+  "backend": {
+    "language": "Python",
+    "framework": "Standalone Library",
+    "runtime": "Python 3.12"
+  },
+  "supported_benchmarks": [
+    "HumanEval (164 Python problems)",
+    "HumanEval+ (80x enhanced tests)",
+    "MBPP (974 Python problems)",
+    "LiveCodeBench (real-time competition problems)",
+    "SWE-bench (GitHub issue → PR)",
+    "Codeforces (competitive programming)"
+  ],
+  "scoring_metrics": [
+    "pass@k (k=1,5,10,100)",
+    "functional_correctness",
+    "code_quality (pylint/flake8)",
+    "execution_efficiency (time/memory)"
+  ],
+  "status": "development",
+  "author": "DaoVirtrue",
+  "tags": ["benchmark", "code-evaluation", "humaneval", "pass@k", "dataset"]
+}

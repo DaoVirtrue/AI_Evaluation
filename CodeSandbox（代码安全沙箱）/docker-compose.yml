@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  code-sandbox:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: code-sandbox:dev
+    container_name: code-sandbox
+    ports:
+      - "8005:8005"
+    environment:
+      - LOG_LEVEL=INFO
+    volumes:
+      # Mount Docker socket for container management
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Temp workspace area
+      - sandbox-tmp:/tmp
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8005/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 512M
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=256M
+    restart: unless-stopped
+
+volumes:
+  sandbox-tmp:
+    driver: local
