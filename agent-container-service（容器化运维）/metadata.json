@@ -1,0 +1,10 @@
+{
+  "project_type": "server",
+  "prompt": "Agent 服务容器化运维。统一 docker-compose.yml 一键部署 7 个容器（4 API + PG + Redis + 前端），Docker Compose dev 版适配 7GB，K8s Helm Chart（HPA/PDB/NetworkPolicy），Prometheus+Grafana+Loki 监控，Trivy 安全扫描，GitHub Actions CI/CD",
+  "frontend_language": "无",
+  "backend_language": "Python, Shell, YAML",
+  "frontend_framework": "无",
+  "backend_framework": "Docker, Kubernetes, Helm, Traefik",
+  "database": "无（编排层）",
+  "status": "✅ 生产运行 — docker compose up -d 一键启动"
+}

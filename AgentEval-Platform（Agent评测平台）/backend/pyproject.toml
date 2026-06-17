@@ -1,0 +1,9 @@
+[project]
+name = "agent-eval-platform"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.0", "uvicorn[standard]>=0.32.0",
+    "sqlalchemy[asyncio]>=2.0", "aiosqlite>=0.20.0",
+    "pydantic>=2.0", "structlog>=24.0", "alembic>=1.14.0",
+]

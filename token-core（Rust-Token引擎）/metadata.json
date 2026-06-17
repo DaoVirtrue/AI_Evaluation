@@ -1,0 +1,10 @@
+{
+  "project_type": "server",
+  "prompt": "Rust 高性能 Token 引擎，Docker 编译 PyO3 绑定成功运行。支持 17 个主流模型精确 Token 计数和成本计算（含缓存折扣、长上下文溢价、Batch 折扣），分层 Context Window 截断，多模型成本对比排序",
+  "frontend_language": "无",
+  "backend_language": "Rust + Python",
+  "frontend_framework": "无",
+  "backend_framework": "Rust PyO3 + FastAPI",
+  "database": "无",
+  "status": "✅ 生产运行 — backend: rust"
+}

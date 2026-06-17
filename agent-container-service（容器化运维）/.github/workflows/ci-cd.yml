@@ -1,0 +1,9 @@
+name: CI/CD Pipeline
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f docker-compose/docker-compose.dev.yml config
+      - run: helm lint k8s/helm-chart

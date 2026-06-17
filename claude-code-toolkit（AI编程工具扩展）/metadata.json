@@ -1,0 +1,10 @@
+{
+  "project_type": "fullstack",
+  "prompt": "AI 编程工具深度集成。3 个 Claude Code Slash Commands（/agent-eval, /agent-debug, /token-estimate），2 个安全 Hook（pre-tool-use 拦截 + cost-warning 告警），3 个 MCP Server（评测查询/Token 估算/Agent 执行），14 个结构化 Prompt 模板（调试/评测/代码生成/安全审计/成本优化），VS Code 插件骨架",
+  "frontend_language": "TypeScript",
+  "backend_language": "Python, Shell",
+  "frontend_framework": "VS Code Extension API, React",
+  "backend_framework": "FastAPI (MCP Server)",
+  "database": "无",
+  "status": "✅ 就绪 — 复制到 .claude/ 即用"
+}

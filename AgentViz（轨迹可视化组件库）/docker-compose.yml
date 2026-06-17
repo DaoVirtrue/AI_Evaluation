@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  agent-viz:
+    build: .
+    image: agent-viz:dev
+    ports:
+      - "6006:6006"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 128M
+    restart: unless-stopped

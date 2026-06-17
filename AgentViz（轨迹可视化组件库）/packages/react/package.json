@@ -1,0 +1,22 @@
+{
+  "name": "@agent-viz/react",
+  "version": "0.1.0",
+  "description": "React components for AgentViz",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
+  "dependencies": {
+    "@agent-viz/core": "workspace:*",
+    "@agent-viz/transform": "workspace:*",
+    "react-window": "^1.8.0",
+    "dompurify": "^3.0.0"
+  }
+}

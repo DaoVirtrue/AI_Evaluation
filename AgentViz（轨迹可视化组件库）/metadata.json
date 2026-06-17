@@ -1,0 +1,10 @@
+{
+  "project_type": "web",
+  "prompt": "Agent 轨迹可视化组件库（npm monorepo），6 个 React 组件：TrajectoryTimeline(DOM/Canvas双模)、TokenUsageChart、ContextWindowViewer、ToolCallGraph(SVG)、AgentDiffView、ThinkingStreamPlayer。Storybook 文档 + Vitest 单元测试",
+  "frontend_language": "TypeScript",
+  "backend_language": "无",
+  "frontend_framework": "React 18, Canvas API, D3.js, Storybook 8",
+  "backend_framework": "无",
+  "database": "无",
+  "status": "✅ npm 包就绪 — Storybook :6006"
+}

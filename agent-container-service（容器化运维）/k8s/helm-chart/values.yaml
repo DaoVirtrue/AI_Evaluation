@@ -1,0 +1,24 @@
+replicaCount: 1
+
+agentForge:
+  image: agent-forge
+  tag: latest
+  replicas: 1
+  resources: {requests: {memory: "256Mi", cpu: "0.5"}, limits: {memory: "512Mi", cpu: "1"}}
+  hpa: {enabled: false, minReplicas: 1, maxReplicas: 5}
+
+tokenCore:
+  image: token-core
+  tag: latest
+  replicas: 1
+  resources: {requests: {memory: "128Mi", cpu: "1"}, limits: {memory: "256Mi", cpu: "2"}}
+
+mcpBridge:
+  image: mcp-bridge
+  tag: latest
+  replicas: 1
+  resources: {requests: {memory: "128Mi", cpu: "0.3"}, limits: {memory: "256Mi", cpu: "0.5"}}
+
+security:
+  runAsNonRoot: true
+  readOnlyRootFilesystem: true

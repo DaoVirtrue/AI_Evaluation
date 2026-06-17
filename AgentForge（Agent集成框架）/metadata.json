@@ -1,0 +1,10 @@
+{
+  "project_type": "server",
+  "prompt": "可插拔 Agent 集成框架。7 层中间件管道（Context检查/安全/Redis缓存/Redis限流/智能路由/追踪/成本），3 种适配器（Native/LangChain/OpenAI Agents），智能 Mock 模式（无 Key 自动用知识库回答，有 Key 调真实 LLM），RL 训练桥接，PostgreSQL 持久化 Agent 配置和会话",
+  "frontend_language": "无",
+  "backend_language": "Python",
+  "frontend_framework": "无",
+  "backend_framework": "FastAPI, SQLAlchemy 2.0 (async)",
+  "database": "PostgreSQL 16 + Redis 7",
+  "status": "✅ 生产运行 — db: postgresql, cache: redis"
+}

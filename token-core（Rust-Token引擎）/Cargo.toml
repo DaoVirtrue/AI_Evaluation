@@ -1,0 +1,42 @@
+[workspace]
+members = [
+    ".",
+    "pyo3-bindings",
+    "wasm-bindings",
+]
+
+[package]
+name = "token-core"
+version = "0.1.0"
+edition = "2021"
+description = "High-performance token counting, context window management, and cost calculation engine"
+license = "MIT"
+
+[lib]
+name = "token_core"
+path = "src/lib.rs"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+rust_decimal = { version = "1.35", features = ["serde"] }
+rayon = "1.10"
+once_cell = "1.20"
+parking_lot = "0.12"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["json", "env-filter"] }
+thiserror = "2.0"
+
+[dev-dependencies]
+criterion = "0.5"
+proptest = "1.5"
+tokio = { version = "1.42", features = ["full"] }
+
+[[bench]]
+name = "throughput"
+harness = false
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1

@@ -1,0 +1,14 @@
+{
+  "name": "@agent-viz/vanilla",
+  "version": "0.1.0",
+  "description": "Web Components wrapper for AgentViz",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@agent-viz/core": "workspace:*"
+  }
+}

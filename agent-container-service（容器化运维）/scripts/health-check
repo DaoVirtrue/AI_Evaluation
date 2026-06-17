@@ -1,0 +1,10 @@
+#!/bin/bash
+# Full-stack health check
+SERVICES=("localhost:8000/health" "localhost:8001/health" "localhost:8003/health" "localhost:8004/health")
+P=0; F=0
+for url in "${SERVICES[@]}"; do
+  if curl -sf "$url" > /dev/null 2>&1; then echo "[PASS] $url"; P=$((P+1))
+  else echo "[FAIL] $url"; F=$((F+1)); fi
+done
+echo "Health: PASS $P FAIL $F"
+exit $F

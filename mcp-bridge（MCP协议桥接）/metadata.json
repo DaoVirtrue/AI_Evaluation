@@ -1,0 +1,10 @@
+{
+  "project_type": "server",
+  "prompt": "MCP 协议桥接与工具治理网关。JSON-RPC 2.0 标准实现，MCP↔OpenAI FC↔Anthropic Tool Use 三协议双向互转，RBAC 权限控制，滑动窗口限流，HMAC 审计日志，3 个内置工具（echo/web_search/calculator）",
+  "frontend_language": "无",
+  "backend_language": "Python",
+  "frontend_framework": "无",
+  "backend_framework": "FastAPI, JSON-RPC 2.0",
+  "database": "无",
+  "status": "✅ 生产运行 — 3 tools ready"
+}

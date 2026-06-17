@@ -1,0 +1,33 @@
+tools:
+  echo:
+    access:
+      roles: [admin, operator, readonly]
+    rate_limit:
+      max_per_minute: 100
+    sandbox:
+      type: none
+    validation:
+      max_params_size: 10000
+
+  web_search:
+    access:
+      roles: [admin, operator]
+    rate_limit:
+      max_per_minute: 30
+      max_per_hour: 200
+    sandbox:
+      type: network_only
+    validation:
+      max_params_size: 5000
+
+  calculator:
+    access:
+      roles: [admin, operator, readonly]
+    rate_limit:
+      max_per_minute: 60
+    sandbox:
+      type: process
+      timeout_seconds: 5
+    validation:
+      max_params_size: 1000
+      forbidden_keywords: [__import__, eval, exec, subprocess, os.system, open, rm, delete, drop]

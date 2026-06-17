@@ -1,0 +1,126 @@
+# ============================================================
+# Agent 全栈平台 — 一键部署（7GB Docker Desktop 开发版）
+# 启动: docker compose up -d
+# 停止: docker compose down
+# ============================================================
+version: "3.9"
+
+x-security: &security
+  security_opt: [no-new-privileges:true]
+  restart: unless-stopped
+
+x-health: &health
+  interval: 30s
+  timeout: 10s
+  retries: 3
+  start_period: 30s
+
+services:
+  # ===== 基础设施 =====
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: agent
+      POSTGRES_PASSWORD: devpass
+      POSTGRES_DB: agent_eval
+    command: postgres -c shared_buffers=64MB -c max_connections=50
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agent"]
+      <<: *health
+    deploy:
+      resources:
+        limits: {cpus: '0.3', memory: 256M}
+    <<: *security
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --maxmemory 64MB --save ""
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      <<: *health
+    deploy:
+      resources:
+        limits: {cpus: '0.2', memory: 64M}
+    <<: *security
+
+  # ===== 业务服务 =====
+
+  # 1. token-core — Token 计数 + 成本计算引擎 (:8003)
+  token-core:
+    build: ./token-core（Rust-Token引擎）
+    image: token-core:dev
+    ports: ["8003:8003"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8003/health"]
+      <<: *health
+    deploy:
+      resources:
+        limits: {cpus: '0.5', memory: 128M}
+    <<: *security
+    read_only: true
+    tmpfs: [/tmp]
+
+  # 2. mcp-bridge — MCP 协议桥接 + 工具治理 (:8004)
+  mcp-bridge:
+    build: ./mcp-bridge（MCP协议桥接）
+    image: mcp-bridge:dev
+    ports: ["8004:8004"]
+    environment:
+      - AUDIT_SECRET=dev-audit-secret
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8004/health"]
+      <<: *health
+    deploy:
+      resources:
+        limits: {cpus: '0.3', memory: 128M}
+    <<: *security
+    read_only: true
+    tmpfs: [/tmp]
+
+  # 3. AgentForge — Agent 集成框架 (:8001)
+  agent-forge:
+    build: ./AgentForge（Agent集成框架）
+    image: agent-forge:dev
+    ports: ["8001:8001"]
+    environment:
+      - TOKEN_CORE_URL=http://token-core:8003
+      - MCP_BRIDGE_URL=http://mcp-bridge:8004
+      - DATABASE_URL=postgresql+asyncpg://agent:devpass@postgres:5432/agent_eval
+      - REDIS_URL=redis://redis:6379/0
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      <<: *health
+    deploy:
+      resources:
+        limits: {cpus: '0.5', memory: 256M}
+    <<: *security
+    depends_on: [token-core, mcp-bridge]
+
+  # 4. AgentEval-Platform Backend — 评测平台 API (:8000)
+  agent-eval-api:
+    build: ./AgentEval-Platform（Agent评测平台）/backend
+    image: agent-eval-api:dev
+    ports: ["8000:8000"]
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://agent:devpass@postgres:5432/agent_eval
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      <<: *health
+    deploy:
+      resources:
+        limits: {cpus: '0.5', memory: 256M}
+    volumes:
+      - ./datasets:/app/datasets
+    <<: *security
+    depends_on: [agent-forge]
+
+  # 5. AgentEval Frontend — React 前端 (:3000)
+  agent-eval-frontend:
+    build: ./AgentEval-Platform（Agent评测平台）/frontend
+    image: agent-eval-frontend:dev
+    ports: ["3000:3000"]
+    deploy:
+      resources:
+        limits: {cpus: '0.5', memory: 256M}
+    <<: *security
+    depends_on: [agent-eval-api]

@@ -1,0 +1,10 @@
+{
+  "project_type": "fullstack",
+  "prompt": "旗舰 Agent 评测平台。5 个前端页面（Dashboard 统计卡片+评测表格 / 创建评测 数据集选择+Agent配置 / 评测详情 指标卡片+结果表格+筛选 / 数据集管理 上传+预览 / 评测对比）。后端 FastAPI + PostgreSQL + 评测 Worker 自动处理。无需 API Key 也能跑通完整评测闭环（智能 Mock 100% 通过率）",
+  "frontend_language": "TypeScript",
+  "backend_language": "Python",
+  "frontend_framework": "React 18, Vite, React Router, TanStack Query",
+  "backend_framework": "FastAPI, SQLAlchemy 2.0 (async)",
+  "database": "PostgreSQL 16 + Redis 7",
+  "status": "✅ 生产运行 — Worker active, 5 pages ready"
+}

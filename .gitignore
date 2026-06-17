@@ -1,0 +1,17 @@
+.env
+*.pyc
+__pycache__/
+node_modules/
+dist/
+target/
+*.egg-info/
+.pytest_cache/
+.vite/
+storybook-static/
+*.log
+audit.log
+eval.db
+*.so
+*.pyd
+playwright_report.json
+e2e_tests/screenshots/

@@ -1,0 +1,10 @@
+{"case_id":"qa-001","input":"法国的首都是哪里？","expected_output":"巴黎","category":"地理","difficulty":"easy"}
+{"case_id":"qa-002","input":"水的化学式是什么？","expected_output":"H2O","category":"科学","difficulty":"easy"}
+{"case_id":"qa-003","input":"What is the capital of Japan?","expected_output":"Tokyo","category":"geography","difficulty":"easy"}
+{"case_id":"qa-004","input":"2 + 2 等于多少？","expected_output":"4","category":"数学","difficulty":"easy"}
+{"case_id":"qa-005","input":"地球绕什么天体旋转？","expected_output":"太阳","category":"天文","difficulty":"easy"}
+{"case_id":"qa-006","input":"Python是什么类型的编程语言？","expected_output":"解释型","category":"编程","difficulty":"medium"}
+{"case_id":"qa-007","input":"HTTP状态码200表示什么？","expected_output":"成功","category":"网络","difficulty":"medium"}
+{"case_id":"qa-008","input":"Docker的主要用途是什么？","expected_output":"容器化","category":"DevOps","difficulty":"medium"}
+{"case_id":"qa-009","input":"MCP是什么的缩写？","expected_output":"Model Context Protocol","category":"AI","difficulty":"hard"}
+{"case_id":"qa-010","input":"Rust语言的最大优势是什么？","expected_output":"内存安全","category":"编程","difficulty":"hard"}
